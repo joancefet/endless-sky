@@ -282,9 +282,12 @@ int main(int argc, char *argv[])
 						{
 							// We either can't resize the window, or don't have to.
 							// So, just inform Screen and OpenGL of the new size.
+							// Note: this may mean that a maximized window with
+							// odd dimensions ends up blurry because everything
+							// is offset by half a pixel.
+							Screen::SetRaw(width, height);
 							SDL_GL_GetDrawableSize(window, &width, &height);
-							Screen::SetRaw(width & ~1, height & ~1);
-							glViewport(0, 0, width & ~1, height & ~1);
+							glViewport(0, 0, width, height);
 						}
 					}
 				}
@@ -376,7 +379,7 @@ void PrintHelp()
 void PrintVersion()
 {
 	cerr << endl;
-	cerr << "Endless Sky 0.9.3" << endl;
+	cerr << "Endless Sky 0.9.4" << endl;
 	cerr << "License GPLv3+: GNU GPL version 3 or later: <https://gnu.org/licenses/gpl.html>" << endl;
 	cerr << "This is free software: you are free to change and redistribute it." << endl;
 	cerr << "There is NO WARRANTY, to the extent permitted by law." << endl;

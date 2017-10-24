@@ -32,7 +32,7 @@ class Point;
 class Font {
 public:
 	Font();
-	Font(const std::string &imagePath);
+	explicit Font(const std::string &imagePath);
 	
 	void Load(const std::string &imagePath);
 	
@@ -43,6 +43,7 @@ public:
 	int Width(const char *str, char after = ' ') const;
 	std::string Truncate(const std::string &str, int width) const;
 	std::string TruncateFront(const std::string &str, int width) const;
+	std::string TruncateMiddle(const std::string &str, int width) const;
 	
 	int Height() const;
 	
